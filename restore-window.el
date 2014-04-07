@@ -23,6 +23,21 @@
 
 ;;; Code:
 
+(defun restore-window-delete-other-windows ()
+  (interactive)
+  (setq restore-window-register (current-window-configuration))
+  (delete-other-windows))
+
+(defun restore-window-restore-window ()
+  (interactive)
+  (set-window-configuration restore-window-register))
+
+(defun restore-window-delete-other-window-or-restore-window ()
+  (interactive)
+  (if (window-parent)
+      (restore-window-delete-other-windows)
+    (restore-window-restore-window)))
+
 (provide 'restore-window)
 
 ;;; restore-window.el ends here

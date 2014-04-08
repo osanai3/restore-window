@@ -1,5 +1,4 @@
-;;; -*- coding: utf-8; lexical-binding: t -*-
-;;; restore-window.el --- restore killed window
+;;; restore-window.el --- restore killed window -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2014 by Koichi Osanai
 
@@ -22,6 +21,8 @@
 ;;; Commentary:
 
 ;;; Code:
+
+(defvar restore-window-register)
 
 (defun restore-window-delete-other-windows ()
   (interactive)

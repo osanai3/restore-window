@@ -20,20 +20,22 @@
 
 ;;; Commentary:
 
-;;; Code:
+;; (require 'restore-window)
+;; (global-set-key (kbd "C-x 1") 'restore-window-delete-other-windows-or-restore-window)
 
-(defvar restore-window-register)
+;;; Code:
 
 (defun restore-window-delete-other-windows ()
   (interactive)
-  (setq restore-window-register (current-window-configuration))
+  (modify-frame-parameters nil (list (cons 'restore-window-register (current-window-configuration))))
   (delete-other-windows))
 
 (defun restore-window-restore-window ()
   (interactive)
-  (set-window-configuration restore-window-register))
+  (let ((configuration (cdr (assoc 'restore-window-register (frame-parameters)))))
+    (when configuration (set-window-configuration configuration))))
 
-(defun restore-window-delete-other-window-or-restore-window ()
+(defun restore-window-delete-other-windows-or-restore-window ()
   (interactive)
   (if (window-parent)
       (restore-window-delete-other-windows)
